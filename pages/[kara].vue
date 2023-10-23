@@ -70,6 +70,7 @@ onUnmounted(() => {
     ref="videoRef"
     controls
     controlslist="nofullscreen"
+    playsinline
     autoplay
     loop
     class="h-screen w-screen"
