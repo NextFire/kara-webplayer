@@ -17,6 +17,7 @@
     "vue-router": "^4.2.5"
   },
   "dependencies": {
+    "@fontsource/amaranth": "^5.0.8",
     "libass-wasm": "^4.1.0"
   }
 }
