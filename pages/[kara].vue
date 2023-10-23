@@ -68,14 +68,16 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <header>
-    <a href="/">Back</a>
-  </header>
-  <h1>{{ $route.params.kara }}</h1>
-  <video ref="videoRef" controls autoplay>
+  <video ref="videoRef" controls autoplay class="h-screen w-screen">
     <!-- LFS workaround -->
     <source
       :src="video?.download_url.replace('/raw/branch/', '/media/branch/')"
     />
   </video>
 </template>
+
+<style>
+body {
+  @apply bg-black;
+}
+</style>

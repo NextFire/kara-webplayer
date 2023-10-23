@@ -6,9 +6,11 @@ const karas = computed(() =>
 </script>
 
 <template>
-  <ul>
-    <li v-for="kara in karas">
-      <a :href="kara.path">{{ kara.name }}</a>
-    </li>
-  </ul>
+  <div class="max-w-screen-lg mx-auto my-4 px-8 ">
+    <ul class="list-disc">
+      <li v-for="kara in karas">
+        <a :href="kara.path" class="hover:underline">{{ kara.name }}</a>
+      </li>
+    </ul>
+  </div>
 </template>
