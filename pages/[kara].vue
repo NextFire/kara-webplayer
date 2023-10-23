@@ -1,24 +1,14 @@
 <script setup lang="ts">
-import subOctoWorkerLegacyUrl from "~/node_modules/libass-wasm/dist/js/subtitles-octopus-worker-legacy.js?url";
-import subOctoWorkerUrl from "~/node_modules/libass-wasm/dist/js/subtitles-octopus-worker.js?url";
-import subOctoWorkerWasmUrl from "~/node_modules/libass-wasm/dist/js/subtitles-octopus-worker.wasm?url";
-import subOctoUrl from "~/node_modules/libass-wasm/dist/js/subtitles-octopus.js?url";
-
 const subOctoLoaded = ref(false);
 useHead({
   script: [
     {
-      src: subOctoUrl,
+      src: "/libass-wasm/subtitles-octopus.js",
       async: true,
       onload: () => {
         subOctoLoaded.value = true;
       },
     },
-  ],
-  link: [
-    { href: subOctoWorkerUrl },
-    { href: subOctoWorkerWasmUrl },
-    { href: subOctoWorkerLegacyUrl },
   ],
 });
 
@@ -53,8 +43,8 @@ watch([subOctoLoaded, subs], async () => {
         "/fonts/Amaranth-Italic.ttf",
         "/fonts/Amaranth-Regular.ttf",
       ],
-      workerUrl: subOctoWorkerUrl, // Link to WebAssembly-based file "libassjs-worker.js"
-      legacyWorkerUrl: subOctoWorkerLegacyUrl, // Link to non-WebAssembly worker
+      workerUrl: "/libass-wasm/subtitles-octopus-worker.js", // Link to WebAssembly-based file "libassjs-worker.js"
+      legacyWorkerUrl: "/libass-wasm/subtitles-octopus-worker-legacy.js", // Link to non-WebAssembly worker
     };
     // @ts-ignore
     window.octopusInstance = new SubtitlesOctopus(options);
