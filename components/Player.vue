@@ -1,4 +1,9 @@
 <script setup lang="ts">
+const props = defineProps<{
+  video: Content;
+  subs: Content;
+}>();
+
 const subOctoLoaded = ref(false);
 useHead({
   script: [
@@ -12,18 +17,11 @@ useHead({
   ],
 });
 
-const route = useRoute();
-const { data } = await useFetch(
-  `/api/contents/dir?filepath=${route.params.kara}`
-);
-const video = computed(() => data.value?.find((i) => i.name.endsWith(".mp4")));
-const subs = computed(() => data.value?.find((i) => i.name.endsWith(".ass")));
-
 const videoRef = ref<HTMLVideoElement | null>(null);
-watch([subOctoLoaded, subs], async () => {
-  if (subOctoLoaded && subs.value) {
+watch([subOctoLoaded, props.subs], async () => {
+  if (subOctoLoaded && props.subs) {
     const { data } = await useFetch(
-      `/api/contents/file?filepath=${subs.value.path}`
+      `/api/contents/file?filepath=${props.subs.path}`
     );
 
     // https://developer.mozilla.org/en-US/docs/Glossary/Base64#the_unicode_problem
@@ -73,7 +71,7 @@ onUnmounted(() => {
     playsinline
     autoplay
     loop
-    class="h-screen w-screen"
+    class="h-screen w-screen bg-black"
   >
     <!-- LFS workaround -->
     <source
@@ -81,9 +79,3 @@ onUnmounted(() => {
     />
   </video>
 </template>
-
-<style>
-body {
-  @apply bg-black;
-}
-</style>

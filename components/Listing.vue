@@ -1,8 +1,9 @@
 <script setup lang="ts">
-const { data } = await useFetch("/api/contents/dir");
-const karas = computed(() =>
-  data.value?.filter((i) => i.type == "dir" && !i.name.startsWith("_"))
-);
+const props = defineProps<{
+  data: Content[];
+}>();
+
+const karas = computed(() => props.data.filter((i) => i.type == "dir"));
 </script>
 
 <template>
